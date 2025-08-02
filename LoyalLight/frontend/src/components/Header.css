@@ -1,0 +1,183 @@
+/**
+ * Header Component Styles
+ * 
+ * Includes subtle animations and accessibility-friendly design.
+ * All animations respect user's motion preferences.
+ */
+
+.app-header {
+  background: linear-gradient(135deg, #0f0f10 0%, #1a1a1c 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(97, 218, 251, 0.03) 0%,
+    transparent 70%
+  );
+  animation: subtle-pulse 8s ease-in-out infinite;
+  z-index: 0;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.app-link {
+  color: #61dafb;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 2rem;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.app-link:hover,
+.app-link:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(97, 218, 251, 0.3);
+}
+
+.app-link:focus {
+  outline: 2px solid #61dafb;
+  outline-offset: 4px;
+}
+
+.header-logo {
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.header-text {
+  margin: 0;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-hover {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes subtle-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+/* Animation classes */
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 1s ease-out 0.3s both;
+}
+
+.animate-scale-hover:hover {
+  animation: scale-hover 0.3s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-header {
+    font-size: calc(8px + 2vmin);
+    padding: 1rem;
+  }
+  
+  .header-logo {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .header-text {
+    font-size: 1.2rem;
+  }
+}
+
+/* Accessibility - Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-scale-hover:hover,
+  .app-header::before {
+    animation: none;
+  }
+  
+  .app-link:hover,
+  .app-link:focus {
+    transform: none;
+  }
+  
+  .header-logo {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .app-header {
+    background: #000000;
+    color: #ffffff;
+  }
+  
+  .app-link {
+    color: #ffffff;
+  }
+  
+  .app-link:focus {
+    outline-color: #ffffff;
+  }
+}
